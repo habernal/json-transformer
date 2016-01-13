@@ -42,7 +42,12 @@ public class JSONDisqusToPigTransformer
         for (File file : files) {
             InputStream inputStream = new FileInputStream(file);
 
-            appendJSONContent(inputStream, printWriter);
+            try {
+                appendJSONContent(inputStream, printWriter);
+            }
+            catch (ParseException ex) {
+                System.err.println(ex + ", file: " + file);
+            }
 
             inputStream.close();
         }
